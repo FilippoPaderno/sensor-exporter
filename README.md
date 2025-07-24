@@ -1,47 +1,65 @@
-# Sensor Exporter (Prometheus + Flask)
+# Sensor Exporter con Dashboard Web
 
-Questo progetto simula un **esportatore di metriche** per sensori industriali, utile per testare una pipeline di **monitoraggio e automazione**.
+Simulatore di sensori industriali con interfaccia web dinamica e supporto per Prometheus.  
+Progetto personale realizzato per esercizio e apprendimento.
+Pensato per applicazioni nel mondo dell'automazione, monitoring e IoT.
 
 ## Funzionalità
 
-- Generazione simulata di metriche:
+- Simulazione realistica di tre sensori:
   - Temperatura (°C)
   - Umidità (%)
   - Vibrazione (0–10)
-- Server Flask con endpoint `/metrics`
-- Compatibile con Prometheus/Grafana
-- Struttura modulare e professionale
+- Endpoint `/metrics` compatibile con Prometheus
+- Interfaccia web aggiornata in tempo reale (JavaScript + Flask)
+- Struttura modulare e pronta per Docker
 
 ## Struttura del progetto
 sensor-exporter/
  - app/
     - metrics.py # Definizione delle metriche
     - updater.py # Generazione e aggiornamento metriche
-    - server.py # Flask + endpoint /metrics
+    - server.py # Flask + endpoint /metrics e /
+    - templates/
+      - dashboard.html # Interfaccia utente HTML
  - exporter.py # Main runner
- - requirements.txt # Dipendenze
+ - requirements.txt # Dipendenze Python
+ - Dockerfile # Container Docker
  - README.md 
 
 ## Avvio
 
-### 1. Crea e attiva ambiente virtuale
+### 1. Clona il progetto
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+git clone https://github.com/FilippoPaderno/sensor-exporter.git
+cd sensor-exporter
 ```
 
 ### 2. Crea e attiva ambiente virtuale
 ```bash
+python -m venv ve
+source ve/bin/activate
+```
+
+### 3. Installa le dipendenze
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Avvia il server
+### 4. Avvia il progetto
 ```bash
 python exporter.py
 ```
 
-Apri il browser su: http://localhost:8000/metrics
+Dashboard: http://localhost:8000
+Metriche Prometheus: http://localhost:8000/metrics
+
+### 5. Esecuzione con Docker
+```bash
+docker build -t sensor-exporter .
+docker run -p 8000:8000 sensor-exporter
+```
 
 ## Tecnologie usate
 

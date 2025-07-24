@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Dashboard</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .metric {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .metric-title {
+            font-weight: bold;
+            color: #555;
+        }
+        .metric-value {
+            font-size: 1.5em;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard sensori</h1>
+    <div class="metric">
+        <div class="metric-title">Temperatura (°C)</div>
+        <div class="metric-value" id="temperature">{{ temperature }}</div>
+    </div>
+    <div class="metric">
+        <div class="metric-title">Umidità (%)</div>
+        <div class="metric-value" id="humidity">{{ humidity }}</div>
+    </div>
+    <div class="metric">
+        <div class="metric-title">Vibrazione</div>
+        <div class="metric-value" id="vibration">{{ vibration }}</div>
+    </div>
+
+    <script>
+        async function updateMetrics() {
+            try {
+                const response = await fetch("/api/metrics");
+                const data = await response.json();
+                document.getElementById("temperature").textContent = data.temperature.toFixed(2);
+                document.getElementById("humidity").textContent = data.humidity.toFixed(1);
+                document.getElementById("vibration").textContent = data.vibration.toFixed(2);
+            } catch (error) {
+                console.error("Errore nel fetch delle metriche:", error);
+            }
+        }
+    
+        // Aggiorna ogni 5 secondi
+        setInterval(updateMetrics, 5000);
+        updateMetrics(); // Chiamata iniziale
+    </script>
+ 
+</body>
+</html>
