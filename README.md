@@ -55,11 +55,39 @@ python exporter.py
 Dashboard: http://localhost:8000
 Metriche Prometheus: http://localhost:8000/metrics
 
-### 5. Esecuzione con Docker
+### Configurazione
+Puoi personalizzare l’intervallo di aggiornamento e il range dei valori modificando config.yaml
+
+### Esecuzione con Docker
 ```bash
 docker build -t sensor-exporter .
 docker run -p 8000:8000 sensor-exporter
 ```
+
+### Esecuzione con Docker di Prometheus e Grafana
+Avvia Prometheus: 
+```bash
+docker run -d \
+  -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+  prom/prometheus
+```
+
+Avvia Grafana:
+```bash
+docker run -d \
+  -p 3000:3000 \
+  grafana/grafana
+```
+
+Accedi a Grafana su http://localhost:3000
+User: admin, Password: admin (default)
+
+### Importazione dashboard Grafana
+- Entra in Grafana → "+" → Import
+- Seleziona grafana-dashboard.json dal progetto
+- Scegli Prometheus come data source
+- Fatto! Visualizza i grafici delle metriche simulate 
 
 ## Tecnologie usate
 
