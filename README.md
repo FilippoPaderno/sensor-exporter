@@ -1,7 +1,7 @@
 # Sensor Exporter con Dashboard Web
 
 Simulatore di sensori industriali con interfaccia web dinamica e supporto per Prometheus.  
-##Progetto personale realizzato per esercizio e apprendimento.
+## Progetto personale realizzato per esercizio e apprendimento.
 Pensato per applicazioni nel mondo dell'automazione, monitoring e IoT.
 
 ## Funzionalità
